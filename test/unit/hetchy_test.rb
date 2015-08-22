@@ -15,6 +15,15 @@ class HetchyTest < Minitest::Test
     assert_equal 4, reservoir.pool[3]
   end
 
+  def test_add_pool_fully_accessible
+    series = Array(1..1000)
+    reservoir = Hetchy.new(size: 10)
+    reservoir << series
+
+    refute_equal 1, reservoir.pool[0], 'first entry in pool can be changed'
+    refute_equal 10, reservoir.pool[-1], 'last entry in pool can be changed'
+  end
+
   def test_add_saturation_starts_sampling
     series = Array(1..15)
     overflow = series[10..-1]
@@ -26,15 +35,6 @@ class HetchyTest < Minitest::Test
     assert_equal 10, reservoir.pool.length, 'pool is stable size'
     refute_equal (series - reservoir.pool), overflow,
       'overflow measures are sampled into pool'
-  end
-
-  def test_add_all_pool_accessible
-    series = Array(1..1000)
-    reservoir = Hetchy.new(size: 10)
-    reservoir << series
-
-    refute_equal 1, reservoir.pool[0], 'first entry in pool can be changed'
-    refute_equal 10, reservoir.pool[-1], 'last entry in pool can be changed'
   end
 
   def test_count
