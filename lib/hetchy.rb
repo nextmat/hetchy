@@ -6,17 +6,17 @@ class Hetchy
               :pool,      # current pool data
               :size       # size of allocated pool
 
-  # Available opts:
+  # Create a reservoir.
   # @option opts [Integer] :size Size of reservoir
   #
   def initialize(opts={})
     @count = 0
-    @size = opts.fetch(:size, 1024)
+    @size = opts.fetch(:size, 1000)
     @pool = Array.new(@size, 0)
     @lock = Mutex.new
   end
 
-  # Add one or more values to the reservoir
+  # Add one or more values to the reservoir.
   # @example
   #   reservoir << 1234
   #   reservoir << [2345,7891,2131]
@@ -24,6 +24,7 @@ class Hetchy
   def << (values)
     Array(values).each do |value|
       @lock.synchronize do
+        # sampling strategy is Vitter's algo R
         if count < size
           @pool[count] = value
         else
