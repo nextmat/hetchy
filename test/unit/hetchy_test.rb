@@ -67,12 +67,13 @@ class HetchyTest < Minitest::Test
 
   def test_snapshot
     reservoir = Hetchy.new(size: 5)
-    reservoir << [1, 2]
+    reservoir << [1,2]
     snapshot = reservoir.snapshot
 
-    reservoir << [3,4]
-    assert_equal [1, 2], snapshot.data[0..1], 'preserves data at time'
-    refute snapshot.data.include?(3), 'does not receive changes'
+    reservoir << 3
+    assert_includes snapshot.data, 1, 'has previous samples'
+    assert_includes snapshot.data, 2, 'has previous samples'
+    refute_includes snapshot.data, 3, 'does not receive changes'
   end
 
 end
