@@ -3,7 +3,7 @@ require "hetchy/version"
 class Hetchy
 
   attr_reader :count,     # number of samples processed
-              :pool,      # current pool data
+              :pool,      # raw pool data, do not modify this
               :size       # size of allocated pool
 
   # Create a reservoir.
@@ -36,6 +36,27 @@ class Hetchy
         @count += 1
       end
     end
+  end
+
+  # Capture a moment in time for the reservoir for analysis.
+  # Since sampling may be ongoing this ensures we are working
+  # with data from our intended period.
+  #
+  def snapshot
+    @lock.synchronize do
+      Snapshot.new(@pool.dup)
+    end
+  end
+
+  # Contains reservoir data frozen in time, created by #snapshot.
+  class Snapshot
+
+    attr_reader :data
+
+    def initialize(data)
+      @data = data
+    end
+
   end
 
 end
