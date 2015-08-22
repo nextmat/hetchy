@@ -1,5 +1,3 @@
-require "hetchy/version"
-
 class Hetchy
 
   attr_reader :count,     # number of samples processed
@@ -48,15 +46,7 @@ class Hetchy
     end
   end
 
-  # Contains reservoir data frozen in time, created by #snapshot.
-  class Snapshot
-
-    attr_reader :data
-
-    def initialize(data)
-      @data = data
-    end
-
-  end
-
 end
+
+require 'hetchy/snapshot'
+require "hetchy/version"
