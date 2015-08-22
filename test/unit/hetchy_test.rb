@@ -37,6 +37,19 @@ class HetchyTest < Minitest::Test
       'overflow measures are sampled into pool'
   end
 
+  def test_add_thread_safety
+    reservoir = Hetchy.new(size: 1024)
+    threads = []
+    5.times do
+      threads << Thread.new do
+        1000.times { reservoir << rand(10000) }
+      end
+    end
+
+    threads.each(&:join)
+    assert_equal 5000, reservoir.count, 'adding is threadsafe'
+  end
+
   def test_count
     reservoir = Hetchy.new(size: 10)
     assert_equal 0, reservoir.count
@@ -50,10 +63,6 @@ class HetchyTest < Minitest::Test
   def test_size
     reservoir = Hetchy.new(size: 5)
     assert_equal 5, reservoir.size
-  end
-
-  def test_thread_safety
-    # TODO
   end
 
 end
