@@ -42,11 +42,11 @@ class Hetchy
   #
   def snapshot
     @lock.synchronize do
-      Snapshot.new(@pool.dup)
+      Dataset.new(@pool.dup)
     end
   end
 
 end
 
-require 'hetchy/snapshot'
+require 'hetchy/dataset'
 require "hetchy/version"

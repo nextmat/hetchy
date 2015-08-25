@@ -1,9 +1,9 @@
 class Hetchy
 
-  # Contains reservoir data frozen in time, created by Hetchy#snapshot.
-  # This class does only read-only work and should be treated as immutable.
+  # Takes a fixed immutable dataset (array of values) and provides
+  # various statistical measurements.
   #
-  class Snapshot
+  class Dataset
 
     attr_reader :data,
                 :size

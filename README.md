@@ -58,8 +58,8 @@ NOTE: you may need to increase your reservoir size for very high resolution perc
 For threaded applications where the reservoir is accepting samples rapidly you can increase performance by snapshotting before running calculations on the reservoir:
 
 ```ruby
-snapshot = reservoir.snapshot
-perc_95 = snapshot.percentile(95)
+dataset = reservoir.snapshot
+perc_95 = dataset.percentile(95)
 ```
 
 If you want to reset the reservoir just empty it:
