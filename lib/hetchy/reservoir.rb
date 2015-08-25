@@ -46,9 +46,9 @@ module Hetchy
     # with data from our intended period.
     #
     def snapshot
-      @lock.synchronize do
-        Dataset.new(@pool.dup)
-      end
+      data = nil
+      @lock.synchronize { data = @pool.dup }
+      Dataset.new(data)
     end
 
     private
