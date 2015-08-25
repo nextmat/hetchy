@@ -41,6 +41,16 @@ module Hetchy
       initialize_pool
     end
 
+    # Calculate a percentile based on the current state of the
+    # reservoir.
+    #
+    # If you are going to calculate multiple percentiles
+    # it will be faster to #snapshot and then calculate them off of
+    # the generated Dataset.
+    def percentile(perc)
+      snapshot.percentile(perc)
+    end
+
     # Capture a moment in time for the reservoir for analysis.
     # Since sampling may be ongoing this ensures we are working
     # with data from our intended period.

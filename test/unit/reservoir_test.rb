@@ -70,6 +70,13 @@ module Hetchy
       assert_equal 10, reservoir.count
     end
 
+    def test_percentile
+      reservoir = Reservoir.new(size: 10)
+      reservoir << [1,2,3,4,5]
+
+      assert_equal 3, reservoir.percentile(50)
+    end
+
     def test_size
       reservoir = Reservoir.new(size: 5)
       assert_equal 5, reservoir.size
