@@ -15,7 +15,7 @@ module Hetchy
 
     # @return [Float/Integer] median of the data set.
     def median
-      # TODO
+      percentile(50.0)
     end
 
     # Generate a percentile for the data set.

@@ -8,6 +8,11 @@ module Hetchy
       assert_equal [1,2,3,5], dataset.data, 'data is sorted'
     end
 
+    def test_median
+      dataset = Dataset.new(Array(1..10))
+      assert_equal 5.5, dataset.median, 'median is accurate'
+    end
+
     def test_percentile_empty
       empty_dataset = Dataset.new([])
       assert_equal 0.0, empty_dataset.percentile(99)
