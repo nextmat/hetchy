@@ -57,6 +57,7 @@ module Hetchy
 
       reservoir.clear
       assert_equal 0, reservoir.pool[0], 'should clear reservoir'
+      assert_equal 0, reservoir.count
     end
 
     def test_count

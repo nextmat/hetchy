@@ -9,7 +9,6 @@ module Hetchy
     # @option opts [Integer] :size Size of reservoir
     #
     def initialize(opts={})
-      @count = 0
       @size = opts.fetch(:size, 1000)
       @lock = Mutex.new
       initialize_pool
@@ -56,6 +55,7 @@ module Hetchy
 
     def initialize_pool
       @lock.synchronize { @pool = Array.new(@size, 0) }
+      @count = 0
     end
 
   end
