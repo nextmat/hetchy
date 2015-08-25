@@ -11,8 +11,8 @@ module Hetchy
     def initialize(opts={})
       @count = 0
       @size = opts.fetch(:size, 1000)
-      @pool = Array.new(@size, 0)
       @lock = Mutex.new
+      initialize_pool
     end
 
     # Add one or more values to the reservoir.
@@ -37,6 +37,11 @@ module Hetchy
       end
     end
 
+    # Empty/reset the reservoir
+    def clear
+      initialize_pool
+    end
+
     # Capture a moment in time for the reservoir for analysis.
     # Since sampling may be ongoing this ensures we are working
     # with data from our intended period.
@@ -45,6 +50,12 @@ module Hetchy
       @lock.synchronize do
         Dataset.new(@pool.dup)
       end
+    end
+
+    private
+
+    def initialize_pool
+      @lock.synchronize { @pool = Array.new(@size, 0) }
     end
 
   end

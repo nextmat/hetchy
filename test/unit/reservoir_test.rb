@@ -51,6 +51,14 @@ module Hetchy
       assert_equal 5000, reservoir.count, 'adding is threadsafe'
     end
 
+    def test_clear
+      reservoir = Reservoir.new(size: 10)
+      reservoir << [1,2,3]
+
+      reservoir.clear
+      assert_equal 0, reservoir.pool[0], 'should clear reservoir'
+    end
+
     def test_count
       reservoir = Reservoir.new(size: 10)
       assert_equal 0, reservoir.count
