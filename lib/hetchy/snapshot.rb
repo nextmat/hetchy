@@ -27,8 +27,19 @@ class Hetchy
       if perc > 100.0 || perc < 0.0
         raise InvalidPercentile, "percentile must be between 0.0 and 100.0"
       end
+      return 0.0 if data.empty?
 
-
+      rank = (perc / 100.0) * (size + 1)
+      if rank == Integer(rank)
+        # exact match
+        data[rank - 1]
+      else
+        # in between, use weighted averaging
+        above = data[rank.to_i]
+        below = data[rank.to_i - 1]
+        fractional = rank - rank.floor
+        below + ((above - below) * fractional)
+      end
     end
 
   end
