@@ -34,12 +34,19 @@ module Hetchy
         # exact match
         data[rank - 1]
       else
-        # in between, use weighted averaging
-        above = data[rank.to_i]
-        below = data[rank.to_i - 1]
-        fractional = rank - rank.floor
-        below + ((above - below) * fractional)
+        weighted_average_for(rank)
       end
+    end
+
+    private
+
+    # when rank lands between values, generated a weighted average
+    # of adjacent values
+    def weighted_average_for(rank)
+      above = data[rank.to_i]
+      below = data[rank.to_i - 1]
+      fractional = rank - rank.floor
+      below + ((above - below) * fractional)
     end
 
   end
