@@ -56,7 +56,7 @@ module Hetchy
       reservoir << [1,2,3]
 
       reservoir.clear
-      assert_equal 0, reservoir.pool[0], 'should clear reservoir'
+      assert_nil reservoir.pool[0], 'should clear reservoir'
       assert_equal 0, reservoir.count
     end
 

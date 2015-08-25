@@ -48,13 +48,13 @@ module Hetchy
     def snapshot
       data = nil
       @lock.synchronize { data = @pool.dup }
-      Dataset.new(data)
+      Dataset.new(data.compact)
     end
 
     private
 
     def initialize_pool
-      @lock.synchronize { @pool = Array.new(@size, 0) }
+      @lock.synchronize { @pool = Array.new(@size) }
       @count = 0
     end
 
