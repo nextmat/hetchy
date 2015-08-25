@@ -1,4 +1,4 @@
-class Hetchy
+module Hetchy
 
   # Takes a fixed immutable dataset (array of values) and provides
   # various statistical measurements.

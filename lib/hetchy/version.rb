@@ -1,3 +1,3 @@
-class Hetchy
+module Hetchy
   VERSION = "0.0.1"
 end

@@ -26,7 +26,7 @@ Or install it yourself as:
 Create a reservoir and designate how big you want it to be:
 
 ```ruby
-reservoir = Hetchy.new(size: 1000)
+reservoir = Hetchy::Reservoir.new(size: 1000)
 ```
 
 Add samples as they arrive or are generated:
@@ -62,10 +62,10 @@ dataset = reservoir.snapshot
 perc_95 = dataset.percentile(95)
 ```
 
-If you want to reset the reservoir just empty it:
+If you want to reset the reservoir just clear it:
 
 ```ruby
-reservoir.empty
+reservoir.clear
 ```
 
 ## Contributing
