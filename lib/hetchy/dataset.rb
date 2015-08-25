@@ -30,12 +30,11 @@ module Hetchy
       return 0.0 if data.empty?
 
       rank = (perc / 100.0) * (size + 1)
-      if rank == Integer(rank)
-        # exact match
-        data[rank - 1]
-      else
-        weighted_average_for(rank)
-      end
+
+      return data[0]          if rank < 1
+      return data[-1]         if rank > size
+      return data[rank - 1]   if rank == Integer(rank)
+      weighted_average_for(rank)
     end
 
     private

@@ -18,6 +18,12 @@ module Hetchy
       assert_equal 0.0, empty_dataset.percentile(99)
     end
 
+    def test_percentile_extreme_bounds
+      dataset = Dataset.new(Array(1..9))
+      assert_equal 9, dataset.percentile(99.9)
+      assert_equal 1, dataset.percentile(0.9)
+    end
+
     def test_percentile_limits
       dataset = Dataset.new([1,2,3])
       assert_raises(InvalidPercentile) { dataset.percentile(-0.2) }
