@@ -1,8 +1,15 @@
 # Hetchy
 
-A high performance, thread-safe reservoir sampler with snapshot and percentile support.
+A high performance, thread-safe reservoir sampler for ruby with snapshot and percentile support.
 
-Each reservoir can accepts an arbitrary number of samples but will consume a limited amount of memory based on the reservoir's size.
+## Goals/Benefits
+
+* Easily generate statistics for large datasets with a very small in-memory footprint
+* Easy generation of percentile/quantiles for a known set or numbers or for a real-time streaming set of numbers
+* Ability to capture sample state at a moment in time for further analysis
+* Speed
+* Thorough test suite
+* No dependencies
 
 ## Installation
 
@@ -12,11 +19,9 @@ Add this line to your application's Gemfile:
 gem 'hetchy'
 ```
 
-And then execute:
+And then `$ bundle`
 
-    $ bundle
-
-Or install it yourself as:
+Or install it yourself with:
 
     $ gem install hetchy
 
@@ -53,20 +58,42 @@ Hetchy supports high resolution percentiles as well:
 reservoir.percentile(99.99)
 ```
 
-NOTE: you may need to increase your reservoir size for very high resolution percentiles
+NOTE: you may need to increase reservoir size for _very_ high resolution percentiles. Experiment to see what works for your data set.
 
-For threaded applications where the reservoir is accepting samples rapidly you can increase performance by snapshotting before running calculations on the reservoir:
+For threaded applications where the reservoir is accepting samples rapidly you can increase performance by snapshotting before running a series of calculations on the reservoir:
 
 ```ruby
-dataset = reservoir.snapshot
-perc_95 = dataset.percentile(95)
+dataset  = reservoir.snapshot
+
+perc_95  = dataset.percentile(95)
+perc_99  = dataset.percentile(99)
+perc_999 = dataset.percentile(99.9)
 ```
 
-If you want to reset the reservoir just clear it:
+Clear the reservoir to reset it:
 
 ```ruby
 reservoir.clear
 ```
+
+## Datasets
+
+If you have an existing series you can use Dataset to generate stats for it:
+
+```ruby
+my_series = Array(1..1000)
+dataset = Hetchy::Dataset.new(my_series)
+
+perc_95 = dataset.percentile(95)   #=> 950.95
+median  = dataset.median           #=> 500.5
+```
+
+## Stats Details
+
+For those interested:
+
+* Reservoir sampling is based on Vitter's algorithm R, ensures a uniform sampling probability for every entry in the series
+* Percentile calculations use weighted averages, not nearest neighbor
 
 ## Contributing
 
