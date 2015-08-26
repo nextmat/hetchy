@@ -24,6 +24,11 @@ module Hetchy
       assert_equal 1, dataset.percentile(0.9)
     end
 
+    def test_percentile_fractional
+      dataset = Dataset.new(SampleSets.set_100)
+      assert_equal 2447.92, dataset.percentile(95.5)
+    end
+
     def test_percentile_limits
       dataset = Dataset.new([1,2,3])
       assert_raises(InvalidPercentile) { dataset.percentile(-0.2) }
