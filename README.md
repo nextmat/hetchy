@@ -2,10 +2,10 @@
 
 A high performance, thread-safe reservoir sampler for ruby with snapshot and percentile support.
 
-## Goals/Benefits
+## Benefits/Goals
 
-* Easily generate statistics for large datasets with a very small in-memory footprint
-* Easy generation of percentile/quantiles for a known set or numbers or for a real-time streaming set of numbers
+* Generate statistics for large datasets with a very small in-memory footprint
+* Generate percentiles/quantiles for a known set or numbers or for real-time streaming set
 * Ability to capture sample state at a moment in time for further analysis
 * Speed
 * Thorough test suite
