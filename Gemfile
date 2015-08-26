@@ -3,6 +3,6 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in hetchy.gemspec
 gemspec
 
-gem 'minitest'
+gem 'minitest', '>= 5'
 gem 'rake'
 gem 'pry'
