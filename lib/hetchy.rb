@@ -1,5 +1,5 @@
 module Hetchy; end
 
-require 'hetchy/dataset'
-require 'hetchy/reservoir'
-require "hetchy/version"
+require_relative 'hetchy/dataset'
+require_relative 'hetchy/reservoir'
+require_relative 'hetchy/version'
