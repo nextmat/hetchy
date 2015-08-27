@@ -6,10 +6,13 @@ require 'hetchy/version'
 Gem::Specification.new do |spec|
   spec.name          = "hetchy"
   spec.version       = Hetchy::VERSION
+
   spec.authors       = ["Matt Sanders"]
   spec.email         = ["matt@modal.org"]
+
   spec.summary       = %q{High performance, thread-safe reservoir sampler with percentile support.}
   spec.description   = %q{A high performance, thread-safe reservoir sampler with snapshot and percentile support.}
+
   spec.homepage      = "https://github.com/nextmat/hetchy"
   spec.license       = "MIT"
 
