@@ -1,5 +1,7 @@
 # Hetchy
 
+[![Gem Version](https://badge.fury.io/rb/hetchy.svg)](http://badge.fury.io/rb/hetchy) [![Code Climate](https://codeclimate.com/github/nextmat/hetchy.png)](https://codeclimate.com/github/nextmat/hetchy)
+
 A high performance, thread-safe reservoir sampler for ruby with snapshot and percentile support.
 
 ## Benefits/Goals
